@@ -16,10 +16,51 @@
         <input type="text" name="" value="" v-model = "cercaFilm">
         <button type="button" name="button" @click = "cerca">cerca</button>
 
-        <div class="film" v-for = "movie in films">
-          <p>{{movie.original_title}}</p>
-          <p v-if = "( movie.vote_average !== 0) ? 'parseFloat(movie.vote_average).toFixed(0) % 2' : '0'">{{movie.vote_average}}</p>
-        </div>
+        <!-- FILM -->
+        <ul class="film" v-for = "movie in films">
+          <li>Titolo Originale : {{movie.original_title}}</li>
+          <li>Voto :
+            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 1 }" ></i>
+            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 2 }"></i>
+            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 3 }"></i>
+            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 4 }"></i>
+            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] == 5 }"></i>
+            {{printVote(movie.vote_average)}}
+          </li>
+          <li>Lingua :
+            {{movie.original_language}}
+            <!-- metodo piu snello senza ripetere troppe volte img e lasciando anche una classe sola -->
+            <img class="flag" :src="'flag/' + movie.original_language + '.svg' " alt="">
+            <!-- <img class="flag" :class="{visibile: movie.original_language === 'en' }" src="flag/en.svg" alt="">
+            <img class="flag" :class="{visibile: movie.original_language === 'es' }" src="flag/es.svg" alt="">
+            <img class="flag" :class="{visibile: movie.original_language === 'it' }" src="flag/it.svg" alt="">
+            <img class="flag" :class="{visibile: movie.original_language === 'fr' }" src="flag/fr.svg" alt="">
+            <img class="flag" :class="{visibile: movie.original_language === 'sv' }" src="flag/sv.svg" alt="">
+            <img class="flag" :class="{visibile: movie.original_language === 'pt' }" src="flag/pt.svg" alt="">
+            <img class="flag" :class="{visibile: movie.original_language === 'de' }" src="flag/de.svg" alt=""> -->
+          </li>
+          <!-- oppure  <p> {{ (movie.vote_average !== 0) ? parseFloat(movie.vote_average / 2).toFixed(0) : 0}}</p> -->
+        </ul>
+
+        <!-- SERIE TV -->
+        <ul class="film" v-for = "serie in serieTv">
+          <li>Titolo Originale : {{serie.original_name}}</li>
+
+          <li>Voto :
+            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] >= 1 }" ></i>
+            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] >= 2 }"></i>
+            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] >= 3 }"></i>
+            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] >= 4 }"></i>
+            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] == 5 }"></i>
+            {{printVote(serie.vote_average)}}
+          </li>
+
+          <li>Lingua :
+            {{serie.original_language}}
+            <img class="flag" :src="'flag/' + serie.original_language + '.svg' " alt="">
+          </li>
+
+        </ul>
       </div>
 
 

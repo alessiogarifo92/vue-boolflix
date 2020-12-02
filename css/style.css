@@ -12,7 +12,19 @@
   justify-content: center;
 }
 
+li{
+  list-style: none;
+}
+
 .film{
-  height: 100px;
-  width: 100px;
+margin: 10px;
+}
+
+.voto{
+  color: yellow;
+}
+
+.flag{
+  width: 20px;
+  height: auto;
 }
