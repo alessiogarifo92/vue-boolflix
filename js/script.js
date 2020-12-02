@@ -16,10 +16,11 @@ var app = new Vue ({
         {
           query: this.cercaFilm
         }
-      })
-      .then(ritorna =>
-        this.films = ritorna)
-        console.log(this.films)
+      }).then((ritorna) =>
+        {this.films = ritorna.data.results,
+        console.log(ritorna)}
+      )
+      this.cercaFilm = '';
     }
   }
 })
