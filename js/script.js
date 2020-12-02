@@ -6,7 +6,8 @@ var app = new Vue ({
   el : '#app',
   data : {
     films : [],
-    cercaFilm : ''
+    cercaFilm : '',
+    numIntero : 0
   },
 
   methods : {
