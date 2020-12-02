@@ -1,7 +1,8 @@
 // MY API KEY = 2aa393177b7d8ed724328e11ae676c78
 
 const moviesApi = 'https://api.themoviedb.org/3/search/movie?api_key=2aa393177b7d8ed724328e11ae676c78&language=it-IT&page=1&include_adult=false&query=';
-const seriesApi = 'https://api.themoviedb.org/3/search/tv?api_key=2aa393177b7d8ed724328e11ae676c78&language=it-IT&page=1&include_adult=false&query=';
+const seriesApi = 'https://api.themoviedb.org/3/search/tv?api_key=2aa393177b7d8ed724328e11ae676c78&language=it_IT&page=1&include_adult=false&query=';
+
 var app = new Vue ({
   el : '#app',
   data : {
@@ -22,8 +23,8 @@ var app = new Vue ({
         {this.films = ritorna.data.results,
         console.log(ritorna)}
         )
-        this.cercaFilm = '';
-      }
+        // this.cercaFilm = ''; //commentato e da eliminare perche nella funzione senno azzera di nuovo cercaFilm e nel passaggio successivo serieTv ottiene una query vuota
+      };
 
       //serieTv
       {axios.get(seriesApi , {
@@ -40,7 +41,7 @@ var app = new Vue ({
     },
 
     printVote: function(movie) {
-      console.log(movie)
+      // console.log(movie) //questo console log riprende gia movie.vote_average in html
       if (movie !== 0) {
         return parseFloat(movie / 2).toFixed(0);
       } else {
