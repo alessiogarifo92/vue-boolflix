@@ -12,8 +12,15 @@
 
     <div id="app">
 
-      <input type="text" name="" value="" v-model = "cercaFilm">
-      <button type="button" name="button" @click = "cerca()">cerca</button>
+      <div id="contenitore">
+        <input type="text" name="" value="" v-model = "cercaFilm">
+        <button type="button" name="button" @click = "cerca">cerca</button>
+
+        <div class="film" v-for = "movie in films">
+          ciao a tutti{{movie.original_title}}
+        </div>
+      </div>
+
 
     </div>
 
