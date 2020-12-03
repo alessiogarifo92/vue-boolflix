@@ -20,7 +20,7 @@
 
         <ul class="film" v-for = "movie in films">
           <div class="poster">
-            <img v-if= "movie.poster_path" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
+            <img v-if= "movie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
             <img v-else src="poster/notfound.png" alt="">
           </div>
           <li>Titolo Originale : {{movie.original_title}}</li>
@@ -54,7 +54,7 @@
 
         <ul class="film" v-for = "serie in serieTv">
           <div class="poster">
-            <img v-if= "serie.poster_path" :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path" alt="">
+            <img v-if= "serie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path" alt="">
             <img v-else src="poster/notfound.png" alt="">
           </div>
           <li>Titolo Originale : {{serie.original_name}}</li>
