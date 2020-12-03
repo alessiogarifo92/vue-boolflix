@@ -31,14 +31,26 @@ main{
   height: 100%;
   overflow: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
-  padding: 5% 7%;
+  padding-top: 3%;
 }
 
-.poster  img{
+.poster{
   height: 250px;
   width: 185px;
+  margin-bottom: 5%;
+  position: relative;
+}
+
+.poster img{
+  height: 250px;
+  width: 185px;
+}
+
+.poster:hover{
+  opacity: 1;
+  z-index: 0;
 }
 
 .invisible{
@@ -46,8 +58,10 @@ main{
 }
 
 .visible{
-  display: block;
-  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
   height: 250px;
   width: 185px;
   display: flex;
@@ -56,13 +70,15 @@ main{
   border: 1px solid white;
 }
 
-ul{
-  display: none;
-  color: white;
+.visible:hover{
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 li{
   list-style: none;
+  color: white;
+  opacity: 1;
 }
 
 .overview{
@@ -73,7 +89,7 @@ li{
 }
 
 .film{
-margin: 10px;
+margin: 20px;
 }
 
 .voto{

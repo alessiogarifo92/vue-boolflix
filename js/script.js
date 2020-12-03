@@ -8,8 +8,7 @@ var app = new Vue ({
   data : {
     films : [],
     serieTv : [],
-    cercaFilm : '',
-    hover : false
+    cercaFilm : ''
   },
 
   methods : {
@@ -46,11 +45,6 @@ var app = new Vue ({
       } else {
         return 0;
       }
-    },
-
-    onMouseOver: function(index) {
-      console.log('on mouse over', index)
-      this.hover = index;
     }
   }
 })

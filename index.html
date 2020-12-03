@@ -28,10 +28,10 @@
 
           <div class="film" v-for = "(movie , index) in films">
             <div class="poster">
-              <img v-if= "movie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="" @mouseover="onMouseOver(index)" @mouseleave="hover === false" :class="{ invisible: hover === index }">
-              <img v-else src="poster/notfound.png" alt="" @mouseover="onMouseOver(index)" @mouseout="hover === false" :class="{ invisible: hover === index }">
+              <img v-if= "movie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="">
+              <img v-else src="poster/notfound.png" alt="">
 
-             <ul :class="{ visible: hover === index }">
+             <ul class="visible">
                <li>Titolo : {{movie.title}}</li>
                <li>Titolo Originale : {{movie.original_title}}</li>
                <li>Voto :
@@ -76,10 +76,10 @@
 
             <div class="poster">
 
-              <img v-if= "serie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w185' + serie.poster_path" alt="" @mouseover="onMouseOver(index)" @mouseleave="hover === false" :class="{ invisible: hover === index }">
-              <img v-else src="poster/notfound.png" alt="" @mouseover="onMouseOver(index)" @mouseleave="hover === false" :class="{ invisible: hover === index }">
+              <img v-if= "serie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w185' + serie.poster_path" alt="">
+              <img v-else src="poster/notfound.png" alt="">
 
-              <ul :class="{ visible: hover === index }">
+              <ul class="visible">
 
                 <li>Titolo : {{serie.name}}</li>
 
