@@ -47,14 +47,29 @@ main{
 
 .visible{
   display: block;
+  background-color: black;
+  height: 250px;
+  width: 185px;
+  display: flex;
+  flex-direction: column;
+  padding: 18% 6% 0;
+  border: 1px solid white;
 }
 
 ul{
   display: none;
+  color: white;
 }
 
 li{
   list-style: none;
+}
+
+.overview{
+  overflow: auto;
+  text-overflow: ellipsis;
+  scrollbar-width: none;
+  margin-top: 5px;
 }
 
 .film{
@@ -65,7 +80,7 @@ margin: 10px;
   color: yellow;
 }
 
-.flag{
+.poster .flag{
   width: 20px;
   height: auto;
 }

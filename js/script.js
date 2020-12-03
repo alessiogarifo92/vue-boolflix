@@ -9,36 +9,34 @@ var app = new Vue ({
     films : [],
     serieTv : [],
     cercaFilm : '',
-    hover: false
+    hover : false
   },
 
   methods : {
     cerca : function(){
       //films
-      {axios.get(moviesApi , {
-          params:
-          {
-            query: this.cercaFilm
-          }
-        }).then((ritorna) =>
-        {this.films = ritorna.data.results,
-        console.log(ritorna)}
-        )
+      axios.get(moviesApi , {
+        params: {
+          query: this.cercaFilm
+        }
+      }).then((ritorna) => {
+        this.films = ritorna.data.results,
+        console.log(ritorna)
+      })
         // this.cercaFilm = ''; //commentato e da eliminare perche nella funzione senno azzera di nuovo cercaFilm e nel passaggio successivo serieTv ottiene una query vuota
-      };
+
 
       //serieTv
-      {axios.get(seriesApi , {
-          params:
-          {
+      axios.get(seriesApi , {
+          params:{
             query: this.cercaFilm
           }
-        }).then((riporta) =>
-          {this.serieTv = riporta.data.results,
-          console.log(riporta)}
-        )
+        }).then((riporta) =>{
+          this.serieTv = riporta.data.results,
+          console.log(riporta)
+        })
         this.cercaFilm = '';
-      }
+
     },
 
     printVote: function(movie) {
@@ -48,6 +46,11 @@ var app = new Vue ({
       } else {
         return 0;
       }
+    },
+
+    onMouseOver: function(index) {
+      console.log('on mouse over', index)
+      this.hover = index;
     }
   }
 })
