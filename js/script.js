@@ -8,7 +8,8 @@ var app = new Vue ({
   data : {
     films : [],
     serieTv : [],
-    cercaFilm : ''
+    cercaFilm : '',
+    hover: false
   },
 
   methods : {

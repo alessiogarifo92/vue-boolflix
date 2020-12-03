@@ -13,66 +13,84 @@
     <div id="app">
 
       <div id="contenitore">
-        <input type="text" name="" value="" v-model = "cercaFilm">
-        <button type="button" name="button" @click = "cerca()">cerca</button>
 
-        <!-- FILM -->
+        <header>
+          <h2>BOOLFLIX</h2>
+          <input type="text" name="" value="" v-model = "cercaFilm" @keyup.enter="cerca()" placeholder="Cerca film e serie tv">
+        </header>
 
-        <ul class="film" v-for = "movie in films">
-          <div class="poster">
-            <img v-if= "movie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
-            <img v-else src="poster/notfound.png" alt="">
+        <main>
+
+          <!-- FILM -->
+
+          <div class="film" v-for = "movie in films">
+            <div class="poster">
+              <img v-if= "movie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt=""  @mouseover="hover === true"
+             :class="{ invisible: hover === true }">
+              <img v-else src="poster/notfound.png" alt="" @mouseover="hover === true"
+             :class="{ invisible: hover === true }">
+            </div>
+
+            <ul>
+              <li>Titolo Originale : {{movie.original_title}}</li>
+              <li>Voto :
+                <!-- <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 1 }" ></i>
+                <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 2 }"></i>
+                <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 3 }"></i>
+                <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 4 }"></i>
+                <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] == 5 }"></i> -->
+                <!-- in alternativa e piu pulito con ciclo stampo o stelle colorate o vuote in base funzione printVote -->
+                <i class="fas fa-star voto" v-for = "stelle in printVote(movie.vote_average)"></i>
+                <i class="fas fa-star" v-for = "stelle in (5 - printVote(movie.vote_average))"></i>
+                {{printVote(movie.vote_average)}}
+              </li>
+              <li>Lingua :
+                {{movie.original_language}}
+                <!-- metodo piu snello senza ripetere troppe volte img e lasciando anche una classe sola -->
+                <img class="flag" :src="'flag/' + movie.original_language + '.svg' " alt="">
+                <!-- <img class="flag" :class="{visibile: movie.original_language === 'en' }" src="flag/en.svg" alt="">
+                <img class="flag" :class="{visibile: movie.original_language === 'es' }" src="flag/es.svg" alt="">
+                <img class="flag" :class="{visibile: movie.original_language === 'it' }" src="flag/it.svg" alt="">
+                <img class="flag" :class="{visibile: movie.original_language === 'fr' }" src="flag/fr.svg" alt="">
+                <img class="flag" :class="{visibile: movie.original_language === 'sv' }" src="flag/sv.svg" alt="">
+                <img class="flag" :class="{visibile: movie.original_language === 'pt' }" src="flag/pt.svg" alt="">
+                <img class="flag" :class="{visibile: movie.original_language === 'de' }" src="flag/de.svg" alt=""> -->
+              </li>
+              <!-- oppure  <p> {{ (movie.vote_average !== 0) ? parseFloat(movie.vote_average / 2).toFixed(0) : 0}}</p> -->
+            </ul>
+
           </div>
-          <li>Titolo Originale : {{movie.original_title}}</li>
-          <li>Voto :
-            <!-- <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 1 }" ></i>
-            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 2 }"></i>
-            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 3 }"></i>
-            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 4 }"></i>
-            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] == 5 }"></i> -->
-            <!-- in alternativa e piu pulito con ciclo stampo o stelle colorate o vuote in base funzione printVote -->
-            <i class="fas fa-star voto" v-for = "stelle in printVote(movie.vote_average)"></i>
-            <i class="fas fa-star" v-for = "stelle in (5 - printVote(movie.vote_average))"></i>
-            {{printVote(movie.vote_average)}}
-          </li>
-          <li>Lingua :
-            {{movie.original_language}}
-            <!-- metodo piu snello senza ripetere troppe volte img e lasciando anche una classe sola -->
-            <img class="flag" :src="'flag/' + movie.original_language + '.svg' " alt="">
-            <!-- <img class="flag" :class="{visibile: movie.original_language === 'en' }" src="flag/en.svg" alt="">
-            <img class="flag" :class="{visibile: movie.original_language === 'es' }" src="flag/es.svg" alt="">
-            <img class="flag" :class="{visibile: movie.original_language === 'it' }" src="flag/it.svg" alt="">
-            <img class="flag" :class="{visibile: movie.original_language === 'fr' }" src="flag/fr.svg" alt="">
-            <img class="flag" :class="{visibile: movie.original_language === 'sv' }" src="flag/sv.svg" alt="">
-            <img class="flag" :class="{visibile: movie.original_language === 'pt' }" src="flag/pt.svg" alt="">
-            <img class="flag" :class="{visibile: movie.original_language === 'de' }" src="flag/de.svg" alt=""> -->
-          </li>
-          <!-- oppure  <p> {{ (movie.vote_average !== 0) ? parseFloat(movie.vote_average / 2).toFixed(0) : 0}}</p> -->
-        </ul>
 
-        <!-- SERIE TV -->
+          <!-- SERIE TV -->
 
-        <ul class="film" v-for = "serie in serieTv">
-          <div class="poster">
-            <img v-if= "serie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path" alt="">
-            <img v-else src="poster/notfound.png" alt="">
+          <div class="film" v-for = "serie in serieTv">
+
+            <div class="poster">
+
+              <img v-if= "serie.poster_path !== null" :src="'https://image.tmdb.org/t/p/w185' + serie.poster_path" alt="">
+              <img v-else src="poster/notfound.png" alt="">
+
+            </div>
+
+            <ul>
+              <li>Titolo Originale : {{serie.original_name}}</li>
+
+              <li>Voto :
+                <!-- stelle colorate -->
+                <i v-for = "stelle in printVote(serie.vote_average)" class="fas fa-star voto"></i>
+                <!-- stelle vuote -->
+                <i class="fas fa-star"  v-for = "stelle in (5 - (printVote(serie.vote_average)))" ></i>
+                {{printVote(serie.vote_average)}}
+              </li>
+
+              <li>Lingua :
+                {{serie.original_language}}
+                <img class="flag" :src="'flag/' + serie.original_language + '.svg' " alt="">
+              </li>
+            </ul>
+
           </div>
-          <li>Titolo Originale : {{serie.original_name}}</li>
-
-          <li>Voto :
-            <!-- stelle colorate -->
-            <i v-for = "stelle in printVote(serie.vote_average)" class="fas fa-star voto"></i>
-            <!-- stelle vuote -->
-            <i class="fas fa-star"  v-for = "stelle in (5 - (printVote(serie.vote_average)))" ></i>
-            {{printVote(serie.vote_average)}}
-          </li>
-
-          <li>Lingua :
-            {{serie.original_language}}
-            <img class="flag" :src="'flag/' + serie.original_language + '.svg' " alt="">
-          </li>
-
-        </ul>
+        </main>
       </div>
 
 
