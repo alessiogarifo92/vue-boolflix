@@ -43,7 +43,7 @@ var app = new Vue ({
     printVote: function(movie) {
       // console.log(movie) //questo console log riprende gia movie.vote_average in html
       if (movie !== 0) {
-        return parseFloat(movie / 2).toFixed(0);
+        return Math.ceil(movie / 2);//math.ceil ritorna numero intero arrotondato in eccesso (parseFloat ritornava stringa e non funzionava)
       } else {
         return 0;
       }

@@ -17,14 +17,22 @@
         <button type="button" name="button" @click = "cerca()">cerca</button>
 
         <!-- FILM -->
+
         <ul class="film" v-for = "movie in films">
+          <div class="poster">
+            <img v-if= "movie.poster_path" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
+            <img v-else src="poster/notfound.png" alt="">
+          </div>
           <li>Titolo Originale : {{movie.original_title}}</li>
           <li>Voto :
-            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 1 }" ></i>
+            <!-- <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 1 }" ></i>
             <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 2 }"></i>
             <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 3 }"></i>
             <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] >= 4 }"></i>
-            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] == 5 }"></i>
+            <i class="fas fa-star" :class="{voto: [printVote(movie.vote_average)] == 5 }"></i> -->
+            <!-- in alternativa e piu pulito con ciclo stampo o stelle colorate o vuote in base funzione printVote -->
+            <i class="fas fa-star voto" v-for = "stelle in printVote(movie.vote_average)"></i>
+            <i class="fas fa-star" v-for = "stelle in (5 - printVote(movie.vote_average))"></i>
             {{printVote(movie.vote_average)}}
           </li>
           <li>Lingua :
@@ -43,15 +51,19 @@
         </ul>
 
         <!-- SERIE TV -->
+
         <ul class="film" v-for = "serie in serieTv">
+          <div class="poster">
+            <img v-if= "serie.poster_path" :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path" alt="">
+            <img v-else src="poster/notfound.png" alt="">
+          </div>
           <li>Titolo Originale : {{serie.original_name}}</li>
 
           <li>Voto :
-            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] >= 1 }" ></i>
-            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] >= 2 }"></i>
-            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] >= 3 }"></i>
-            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] >= 4 }"></i>
-            <i class="fas fa-star" :class="{voto: [printVote(serie.vote_average)] == 5 }"></i>
+            <!-- stelle colorate -->
+            <i v-for = "stelle in printVote(serie.vote_average)" class="fas fa-star voto"></i>
+            <!-- stelle vuote -->
+            <i class="fas fa-star"  v-for = "stelle in (5 - (printVote(serie.vote_average)))" ></i>
             {{printVote(serie.vote_average)}}
           </li>
 

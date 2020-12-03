@@ -12,6 +12,10 @@
   justify-content: center;
 }
 
+.poster > img{
+  height: auto;
+}
+
 li{
   list-style: none;
 }
